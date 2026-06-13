@@ -110,7 +110,7 @@ h2.section-title {
 
 /* scroll anchor offset for the sticky header */
 :where(#about, #expertise, #work, #contact) {
-  scroll-margin-top: 72px;
+  scroll-margin-top: 80px;
 }
 
 /* ---- grain overlay ---------------------------------------------------- */
@@ -123,6 +123,20 @@ h2.section-title {
   opacity: 0.035;
   mix-blend-mode: multiply;
   z-index: 9999;
+}
+
+/* ---- site frame (printed-plate double rule) --------------------------- */
+.site-frame {
+  position: fixed;
+  inset: 12px;
+  border: 3px double var(--rule-strong);
+  pointer-events: none;
+  z-index: 9000; /* above content + sticky header, below the grain */
+}
+@media (max-width: 600px) {
+  .site-frame {
+    inset: 8px;
+  }
 }
 
 /* ---- buttons ---------------------------------------------------------- */
@@ -167,9 +181,9 @@ h2.section-title {
 }
 .site-header .wrap {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 64px;
+  align-items: stretch; /* cells fill the band height → full-height rules */
+  justify-content: flex-start; /* logo + menu cluster to the left */
+  min-height: 66px;
 }
 .brand {
   display: flex;
@@ -178,6 +192,8 @@ h2.section-title {
   font-weight: 600;
   font-size: 1.12rem;
   letter-spacing: 0.01em;
+  padding-right: 26px;
+  border-right: 1px solid var(--rule); /* first cell divider */
 }
 .brand .mark {
   font-family: var(--font-mono), monospace;
@@ -201,47 +217,60 @@ h2.section-title {
 }
 .primary-nav {
   display: flex;
-  align-items: center;
+  align-items: stretch;
+  flex: 1; /* fill the band so social can sit at the far right */
 }
+/* Hermes ruled band: each item is a tall cell divided by hairline rules,
+   left-clustered right after the brand. Quiet text; pure opacity fade on hover. */
 .nav-links {
   display: flex;
-  align-items: center;
-  gap: 26px;
+  align-items: stretch;
+  gap: 0;
   list-style: none;
 }
+.nav-links li {
+  display: flex;
+}
 .nav-links a {
+  display: flex;
+  align-items: center;
   font-family: var(--font-mono), monospace;
-  font-size: 0.74rem;
+  font-size: 0.78rem;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--ink-soft);
-  padding: 4px 0;
-  border-bottom: 1px solid transparent;
-  transition: color 0.15s ease, border-color 0.15s ease;
+  letter-spacing: 0.18em;
+  color: var(--ink);
+  opacity: 0.55;
+  padding: 0 24px;
+  border-right: 1px solid var(--rule); /* cell divider — the "box" around items */
+  transition: opacity 0.18s ease, background 0.18s ease;
+}
+.nav-links li:last-child a {
+  border-right: none;
 }
 .nav-links a:hover {
-  color: var(--ink);
-  border-color: var(--ink);
+  opacity: 1;
+  background: var(--paper-raised);
 }
 .nav-social {
   display: flex;
   align-items: center;
-  gap: 14px;
-  margin-left: 8px;
-  padding-left: 18px;
-  border-left: 1px solid var(--rule);
+  gap: 16px;
+  margin-left: auto; /* far right of the band */
 }
 .nav-social a {
-  color: var(--ink-soft);
+  color: var(--ink);
+  opacity: 0.55;
   display: inline-flex;
-  transition: color 0.15s ease, transform 0.15s ease;
+  transition: opacity 0.18s ease, color 0.18s ease;
 }
 .nav-social a:hover {
+  opacity: 1;
   color: var(--accent);
-  transform: translateY(-1px);
 }
 .nav-toggle {
   display: none;
+  margin-left: auto; /* far right when shown on mobile */
+  align-self: center;
   background: none;
   border: 1px solid var(--rule-strong);
   width: 40px;
@@ -311,7 +340,7 @@ h2.section-title {
   font-family: var(--font-mono), monospace;
   font-size: 0.86rem;
   background: var(--paper-raised);
-  border: 1px solid var(--rule);
+  border: 3px double var(--rule-strong);
   box-shadow: 5px 5px 0 var(--rule);
   max-width: 600px;
   margin-bottom: 30px;
@@ -643,7 +672,8 @@ h2.section-title {
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  padding: 90px 0;
+  padding: 90px 0 30px;
+  border-bottom: none; /* the .contact-end bar terminates the section */
 }
 .contact::before {
   content: "";
@@ -660,6 +690,15 @@ h2.section-title {
   margin-left: auto;
   max-width: 560px;
   text-align: left;
+  border: 1px solid var(--rule-strong);
+  background: color-mix(in srgb, var(--paper-raised) 84%, transparent);
+  box-shadow: 6px 6px 0 var(--rule);
+  padding: 38px 40px;
+}
+/* full-width closing bar — terminates the section before the dark footer */
+.contact-end {
+  margin-top: 72px;
+  border-top: 3px double var(--rule-strong);
 }
 .contact h2 {
   font-size: clamp(2.1rem, 5vw, 3.4rem);
@@ -795,7 +834,7 @@ h2.section-title {
    ========================================================================= */
 .reveal {
   opacity: 0;
-  transform: translateY(10px);
+  transform: translateY(12px);
   transition: opacity 0.5s ease-out, transform 0.5s ease-out;
 }
 .reveal.in {
@@ -839,6 +878,10 @@ h2.section-title {
   .primary-nav {
     display: none;
   }
+  .brand {
+    border-right: none;
+    padding-right: 0;
+  }
   .nav-toggle {
     display: inline-flex;
   }
@@ -847,7 +890,7 @@ h2.section-title {
     flex-direction: column;
     align-items: stretch;
     position: absolute;
-    top: 64px;
+    top: 68px;
     left: 0;
     right: 0;
     background: var(--paper);
@@ -866,8 +909,11 @@ h2.section-title {
   .site-header.open .nav-links a {
     display: block;
     width: 100%;
-    padding: 13px 0;
+    padding: 13px 2px;
+    border: none;
     border-bottom: 1px solid var(--rule);
+    background: none;
+    opacity: 1;
     font-size: 0.82rem;
   }
   .site-header.open .nav-social {
@@ -898,7 +944,7 @@ h2.section-title {
     padding: 56px 0;
   }
   .contact {
-    padding: 64px 0;
+    padding: 56px 0 26px;
   }
   .contact::before {
     opacity: 0.16;
@@ -906,6 +952,11 @@ h2.section-title {
   }
   .contact-inner {
     margin: 0;
+    padding: 26px 22px;
+    box-shadow: 4px 4px 0 var(--rule);
+  }
+  .contact-end {
+    margin-top: 48px;
   }
   .terminal {
     box-shadow: 4px 4px 0 var(--rule);

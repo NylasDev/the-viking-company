@@ -1,4 +1,5 @@
 import Grain from "@/components/Grain";
+import SiteFrame from "@/components/SiteFrame";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
@@ -11,6 +12,7 @@ export default function Home() {
   return (
     <>
       <Grain />
+      <SiteFrame />
       <Header />
       <main>
         <Hero />
