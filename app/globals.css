@@ -110,7 +110,7 @@ h2.section-title {
 
 /* scroll anchor offset for the sticky header */
 :where(#about, #expertise, #work, #contact) {
-  scroll-margin-top: 88px;
+  scroll-margin-top: 80px;
 }
 
 /* ---- grain overlay ---------------------------------------------------- */
@@ -181,9 +181,9 @@ h2.section-title {
 }
 .site-header .wrap {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 76px;
+  align-items: stretch; /* cells fill the band height → full-height rules */
+  justify-content: flex-start; /* logo + menu cluster to the left */
+  min-height: 66px;
 }
 .brand {
   display: flex;
@@ -192,6 +192,8 @@ h2.section-title {
   font-weight: 600;
   font-size: 1.12rem;
   letter-spacing: 0.01em;
+  padding-right: 26px;
+  border-right: 1px solid var(--rule); /* first cell divider */
 }
 .brand .mark {
   font-family: var(--font-mono), monospace;
@@ -215,39 +217,45 @@ h2.section-title {
 }
 .primary-nav {
   display: flex;
-  align-items: center;
+  align-items: stretch;
+  flex: 1; /* fill the band so social can sit at the far right */
 }
+/* Hermes ruled band: each item is a tall cell divided by hairline rules,
+   left-clustered right after the brand. Quiet text; pure opacity fade on hover. */
 .nav-links {
   display: flex;
-  align-items: center;
-  gap: 10px;
+  align-items: stretch;
+  gap: 0;
   list-style: none;
 }
-/* quiet-until-hover boxed links — each a small square plate */
+.nav-links li {
+  display: flex;
+}
 .nav-links a {
+  display: flex;
+  align-items: center;
   font-family: var(--font-mono), monospace;
-  font-size: 0.72rem;
+  font-size: 0.78rem;
   text-transform: uppercase;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.18em;
   color: var(--ink);
-  opacity: 0.6;
-  border: 1px solid var(--rule);
-  padding: 0.5rem 0.85rem;
-  transition: opacity 0.18s ease, border-color 0.18s ease,
-    background 0.18s ease;
+  opacity: 0.55;
+  padding: 0 24px;
+  border-right: 1px solid var(--rule); /* cell divider — the "box" around items */
+  transition: opacity 0.18s ease, background 0.18s ease;
+}
+.nav-links li:last-child a {
+  border-right: none;
 }
 .nav-links a:hover {
   opacity: 1;
-  border-color: var(--ink);
   background: var(--paper-raised);
 }
 .nav-social {
   display: flex;
   align-items: center;
-  gap: 14px;
-  margin-left: 8px;
-  padding-left: 18px;
-  border-left: 1px solid var(--rule);
+  gap: 16px;
+  margin-left: auto; /* far right of the band */
 }
 .nav-social a {
   color: var(--ink);
@@ -261,6 +269,8 @@ h2.section-title {
 }
 .nav-toggle {
   display: none;
+  margin-left: auto; /* far right when shown on mobile */
+  align-self: center;
   background: none;
   border: 1px solid var(--rule-strong);
   width: 40px;
@@ -858,6 +868,10 @@ h2.section-title {
   .primary-nav {
     display: none;
   }
+  .brand {
+    border-right: none;
+    padding-right: 0;
+  }
   .nav-toggle {
     display: inline-flex;
   }
@@ -866,7 +880,7 @@ h2.section-title {
     flex-direction: column;
     align-items: stretch;
     position: absolute;
-    top: 76px;
+    top: 68px;
     left: 0;
     right: 0;
     background: var(--paper);
