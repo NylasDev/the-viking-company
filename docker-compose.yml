@@ -1,0 +1,17 @@
+services:
+  web:
+    build: .
+    container_name: viking-web
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      # persist TLS certificates + Caddy state across rebuilds (avoids
+      # re-issuing certs and hitting Let's Encrypt rate limits)
+      - caddy_data:/data
+      - caddy_config:/config
+
+volumes:
+  caddy_data:
+  caddy_config:
