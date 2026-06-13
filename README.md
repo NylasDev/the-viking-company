@@ -45,8 +45,8 @@ The engraved WebP images are committed in `public/img/` — no extra steps neede
 to run the site.
 
 They were produced from public-domain Wikimedia paintings with the
-**`hermes-mythic-design`** skill (published in its own repository). The recipe,
-for reference:
+**[`hermes-mythic-design`](https://github.com/NylasDev/hermes-mythic-design)**
+skill (maintained in its own repo). The recipe, for reference:
 
 ```bash
 # hero background (faded toward the text side)
@@ -69,8 +69,8 @@ Outputs are then resized + converted to WebP for delivery. Source paintings used
 The `hermes-mythic-design` skill's `engrave.py` was extended with a **`--gamma`**
 tone-curve option: `--gamma 0.5–0.8` lifts shadows on dark/night photos so they
 stop blocking up into solid ink (cleaner than just lowering `--contrast`);
-`--gamma 1.2–1.6` deepens a washed-out image. The skill is maintained in its own
-repository.
+`--gamma 1.2–1.6` deepens a washed-out image. The skill lives at
+[github.com/NylasDev/hermes-mythic-design](https://github.com/NylasDev/hermes-mythic-design).
 
 ## The Work section
 
