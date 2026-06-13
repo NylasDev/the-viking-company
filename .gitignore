@@ -1,0 +1,38 @@
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# misc
+.DS_Store
+*.pem
+Thumbs.db
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# local env files
+.env*.local
+.env
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# working assets (source images kept out of the repo; engraved outputs live in public/img)
+/assets/source
+
+# the hermes-mythic-design skill is published in its own repo — keep it out of this one
+/Hermes Design/
+
+# Claude Code local config
+/.claude/
