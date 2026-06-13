@@ -672,7 +672,8 @@ h2.section-title {
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  padding: 90px 0;
+  padding: 90px 0 30px;
+  border-bottom: none; /* the .contact-end bar terminates the section */
 }
 .contact::before {
   content: "";
@@ -689,6 +690,15 @@ h2.section-title {
   margin-left: auto;
   max-width: 560px;
   text-align: left;
+  border: 1px solid var(--rule-strong);
+  background: color-mix(in srgb, var(--paper-raised) 84%, transparent);
+  box-shadow: 6px 6px 0 var(--rule);
+  padding: 38px 40px;
+}
+/* full-width closing bar — terminates the section before the dark footer */
+.contact-end {
+  margin-top: 72px;
+  border-top: 3px double var(--rule-strong);
 }
 .contact h2 {
   font-size: clamp(2.1rem, 5vw, 3.4rem);
@@ -824,7 +834,7 @@ h2.section-title {
    ========================================================================= */
 .reveal {
   opacity: 0;
-  transform: translateY(10px);
+  transform: translateY(12px);
   transition: opacity 0.5s ease-out, transform 0.5s ease-out;
 }
 .reveal.in {
@@ -934,7 +944,7 @@ h2.section-title {
     padding: 56px 0;
   }
   .contact {
-    padding: 64px 0;
+    padding: 56px 0 26px;
   }
   .contact::before {
     opacity: 0.16;
@@ -942,6 +952,11 @@ h2.section-title {
   }
   .contact-inner {
     margin: 0;
+    padding: 26px 22px;
+    box-shadow: 4px 4px 0 var(--rule);
+  }
+  .contact-end {
+    margin-top: 48px;
   }
   .terminal {
     box-shadow: 4px 4px 0 var(--rule);

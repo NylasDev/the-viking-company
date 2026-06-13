@@ -30,6 +30,7 @@ export default function Contact() {
             <DiscordTag handle={social.discord} />
           </div>
         </Reveal>
+        <div className="contact-end" aria-hidden="true" />
       </div>
     </section>
   );
