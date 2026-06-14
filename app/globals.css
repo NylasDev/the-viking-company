@@ -980,3 +980,237 @@ h2.section-title {
     padding: 0.7rem 1.1rem;
   }
 }
+
+/* =========================================================================
+   HEIMDALL — chat bubble (the watchman)
+   ========================================================================= */
+.heimdall-launcher {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  z-index: 1200;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-mono), monospace;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--ink);
+  background: var(--paper-raised);
+  border: 1px solid var(--ink);
+  box-shadow: 4px 4px 0 var(--rule);
+  padding: 0.55rem 0.9rem 0.55rem 0.55rem;
+  cursor: pointer;
+  transition: background 0.18s ease, color 0.18s ease;
+}
+.heimdall-launcher:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+.heimdall-launcher .heimdall-mark {
+  font-family: var(--font-mono), monospace;
+  font-weight: 600;
+  width: 26px;
+  height: 26px;
+  display: grid;
+  place-items: center;
+  border: 1px solid currentColor;
+  font-size: 1rem;
+}
+
+.heimdall-panel {
+  position: fixed;
+  right: 22px;
+  bottom: 86px;
+  z-index: 1200;
+  width: 372px;
+  max-width: calc(100vw - 32px);
+  height: 70vh;
+  max-height: 560px;
+  display: flex;
+  flex-direction: column;
+  background: var(--paper);
+  border: 3px double var(--rule-strong);
+  box-shadow: 6px 6px 0 var(--rule);
+  animation: heimdall-rise 0.22s ease-out;
+}
+@keyframes heimdall-rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.heimdall-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--rule);
+  background: var(--paper-raised);
+}
+.heimdall-eyebrow {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.66rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--ink-faint);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.heimdall-dot {
+  width: 7px;
+  height: 7px;
+  background: var(--accent-ink);
+  display: inline-block;
+}
+.heimdall-x {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--ink-faint);
+  font-size: 0.9rem;
+  line-height: 1;
+}
+.heimdall-x:hover {
+  color: var(--accent);
+}
+.heimdall-log {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.heimdall-msg {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-width: 88%;
+}
+.heimdall-msg .heimdall-who {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.58rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--ink-faint);
+}
+.heimdall-msg p {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--ink);
+  border: 1px solid var(--rule);
+  padding: 9px 11px;
+}
+.heimdall-msg.heimdall {
+  align-self: flex-start;
+}
+.heimdall-msg.heimdall p {
+  background: var(--paper-raised);
+}
+.heimdall-msg.you {
+  align-self: flex-end;
+  align-items: flex-end;
+}
+.heimdall-msg.you p {
+  background: var(--paper-warm);
+}
+.heimdall-typing {
+  display: inline-flex;
+  gap: 5px;
+  align-items: center;
+}
+.heimdall-typing span {
+  width: 5px;
+  height: 5px;
+  background: var(--ink-faint);
+  display: inline-block;
+  animation: heimdall-blink 1s infinite;
+}
+.heimdall-typing span:nth-child(2) {
+  animation-delay: 0.15s;
+}
+.heimdall-typing span:nth-child(3) {
+  animation-delay: 0.3s;
+}
+@keyframes heimdall-blink {
+  0%,
+  100% {
+    opacity: 0.25;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+.heimdall-form {
+  display: flex;
+  gap: 8px;
+  padding: 10px;
+  border-top: 1px solid var(--rule);
+  background: var(--paper-raised);
+}
+.heimdall-form input {
+  flex: 1;
+  min-width: 0;
+  font-family: var(--font-display), serif;
+  font-size: 0.95rem;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid var(--rule-strong);
+  padding: 8px 10px;
+}
+.heimdall-form input:focus {
+  outline: none;
+  border-color: var(--ink);
+}
+.heimdall-form button {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  border: 1px solid var(--ink);
+  background: var(--paper);
+  color: var(--ink);
+  padding: 0 14px;
+  cursor: pointer;
+  transition: background 0.18s ease, color 0.18s ease;
+}
+.heimdall-form button:hover:not(:disabled) {
+  background: var(--ink);
+  color: var(--paper);
+}
+.heimdall-form button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+@media (max-width: 480px) {
+  .heimdall-panel {
+    right: 12px;
+    left: 12px;
+    bottom: 74px;
+    width: auto;
+    max-width: none;
+    height: 68vh;
+  }
+  .heimdall-launcher {
+    right: 12px;
+    bottom: 12px;
+  }
+  .heimdall-launcher-label {
+    display: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .heimdall-panel {
+    animation: none;
+  }
+  .heimdall-typing span {
+    animation: none;
+  }
+}
