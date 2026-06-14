@@ -59,15 +59,15 @@ d.text((mx + 23, my + 23), "V", font=vc, fill=INK, anchor="mm")
 
 # eyebrow
 d.text((mx + 64, my + 10), "THE VIKING COMPANY", font=mono_sm, fill=INK_FAINT)
-d.text((mx + 64, my + 32), "AI ENGINEERING", font=mono_sm, fill=INK_FAINT)
+d.text((mx + 64, my + 32), "AI AGENCY · BUCHAREST", font=mono_sm, fill=INK_FAINT)
 
 # --- headline ---
-d.text((70, 210), "Agents That", font=serif_b, fill=INK)
-d.text((70, 308), "Learn and Ship.", font=serif_b, fill=INK_SOFT)
+d.text((70, 210), "Agents that", font=serif_b, fill=INK)
+d.text((70, 308), "learn and ship.", font=serif_b, fill=INK_SOFT)
 
 # tagline
-d.text((72, 430), "AI engineer building autonomous agents,", font=serif_i, fill=INK_SOFT)
-d.text((72, 468), "skills, tooling & RAG systems.", font=serif_i, fill=INK_SOFT)
+d.text((72, 430), "Autonomous agents, skills, tooling", font=serif_i, fill=INK_SOFT)
+d.text((72, 468), "& RAG — built to run in production.", font=serif_i, fill=INK_SOFT)
 
 # --- bottom mono strip with accent prompt ---
 by = 540

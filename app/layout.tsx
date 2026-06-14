@@ -64,7 +64,7 @@ export const metadata: Metadata = {
         url: "/og.png",
         width: 1200,
         height: 630,
-        alt: "The Viking Company — AI engineering: agents, skills, and RAG",
+        alt: "The Viking Company AI Agency — agents that learn and ship",
       },
     ],
   },
