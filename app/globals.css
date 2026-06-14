@@ -44,6 +44,11 @@
 html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
+  /* Kill horizontal scroll at the root. iOS/Safari/Brave let <html> scroll
+     sideways on sub-pixel overflow even when body has overflow-x:hidden, so the
+     guard must live here too. `clip` doesn't create a scroll container, so
+     position:sticky keeps working. */
+  overflow-x: clip;
 }
 
 body {
@@ -54,7 +59,13 @@ body {
   line-height: 1.62;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  position: relative;
+  width: 100%;
+  max-width: 100%;
   overflow-x: hidden;
+  /* Long emails / URLs / registration IDs wrap instead of forcing a sideways
+     scroll on narrow phones. */
+  overflow-wrap: break-word;
 }
 
 ::selection {
@@ -1196,15 +1207,27 @@ h2.section-title {
     bottom: 74px;
     width: auto;
     max-width: none;
-    height: 68vh;
+    height: 68dvh; /* dvh tracks the iOS address-bar show/hide */
   }
   .heimdall-launcher {
     right: 12px;
-    bottom: 12px;
+    bottom: max(12px, env(safe-area-inset-bottom)); /* clear the iOS home indicator */
+    padding: 0.5rem; /* symmetric once the label is hidden */
   }
   .heimdall-launcher-label {
     display: none;
   }
+}
+
+/* ---- mobile / iOS hardening: never allow a sideways scroll -------------- */
+.footer-meta,
+.contact-links a,
+.contact-actions .btn,
+.heimdall-msg p {
+  overflow-wrap: anywhere; /* long emails / URLs / reg IDs wrap, never overflow */
+}
+.terminal {
+  overflow-x: auto; /* keep any wide mono line inside the box, not the page */
 }
 @media (prefers-reduced-motion: reduce) {
   .heimdall-panel {
