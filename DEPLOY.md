@@ -1,8 +1,35 @@
-# Deploying to a Hetzner VPS with Docker
+# Deploying The Viking Company
 
-This site is a **static export** (plain HTML/CSS/JS in `out/`). Serving it is
-about as light as web hosting gets — a single Caddy container, well under ~50 MB
-RAM. So yes: your instinct is right, this is cheap and easy.
+This site is a **static export** (plain HTML/CSS/JS in `out/`) — about as light
+as web hosting gets.
+
+## Deploying with Coolify (the active path) ✅
+
+The site runs on a Hetzner VPS via **Coolify**. Deploy it as a **static site** —
+**do not** let Coolify build the Dockerfile (Coolify runs its own reverse proxy
+on 80/443, so a Caddy-in-Dockerfile container collides with it and exits, which
+shows up as `Error response from daemon: No such container: <coolify-id>`).
+
+In the Coolify resource:
+
+1. **Build Pack: Nixpacks** (not Dockerfile).
+2. Toggle **"Is it a static site?" → ON**.
+3. **Output / Publish Directory: `out`** (build command `npm run build`).
+4. Set the **Domain (FQDN)** to `https://thevikingcompany.eu` — Coolify's proxy
+   handles TLS automatically.
+5. Deploy.
+
+> The standalone Dockerfile / Caddyfile / docker-compose (for running *without*
+> Coolify) were removed from the repo root because they conflict with Coolify's
+> build-pack auto-detection. They remain in git history if you ever want the
+> bare-Docker route — `git show <commit>:Dockerfile`.
+
+---
+
+## Appendix: bare-Docker route (no Coolify)
+
+Only relevant if you ever drop Coolify. This site is a static export, so serving
+it standalone is a single tiny Caddy container (well under ~50 MB RAM).
 
 ---
 
